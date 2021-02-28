@@ -27,7 +27,7 @@ _Также предполагается пропускать определен
 **Часть 1** - Сравнение объектов, String pool, IntPool, intent, constant pool, auto boxing/unboxing:
 Кандидату предлагается задачка из Сниппета 
 ```
-"CompareObjectsSnippet" 
+[a link](src/main/java/ru/demkin/interview/snippets/CompareObject.java)
 ```
 
 По результатам обсуждения предлагаю реализовать метод Integer.valueOf самостоятельно
