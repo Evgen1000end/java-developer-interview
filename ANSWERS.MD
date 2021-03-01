@@ -30,11 +30,22 @@ _Также предполагается пропускать определен
 https://github.com/Evgen1000end/java-developer-interview/blob/main/src/main/java/ru/demkin/interview/snippets/CompareObject.java
 ```
 
+Ответ: 
+
+
 По результатам обсуждения предлагаю реализовать метод Integer.valueOf самостоятельно
 
 **Часть 2** - Коллекции
 1) Какие классы и интерфейсы вы знаете/использовали? 
+
+Ответ: 
+
+ Интерфейсы: List, Queue, Set, Deque, SortedSet
+ Классы: ArrayList, LinkedList, HashSet и т.д.
+ + Map и HashMap
+
 2) ArrayList vs Массив? Какие преимущества? 
+
 3) Реализация метода ArrayList.add() - знает ли кандидат про Arrays.copyOf и как часто он вызывается?
 4) Задача на ArrayList:
 
@@ -59,6 +70,12 @@ https://github.com/Evgen1000end/java-developer-interview/blob/main/src/main/java
 ```
 
 6) ArrayList vs LinkedList - в каком случае целесообразно использовать LinkedList? Привести пример из жизни.
+
+Ответ:
+
+ArrayList следует использовать, когда в приоритете доступ по индексу, так как эти операции выполняются за константное время. Добавление в конец списка в среднем тоже выполняется за константное время. Кроме того в ArrayList нет дополнительных расходов на хранение связки между элементами. Минусы в скорости вставки/удаления элементов находящихся не в конце списка, так как при этой операции все элементы правее добавляемого/удаляемого сдвигаются.
+
+LinkedList удобен когда важнее быстродействие операций вставки/удаления, которые в LinkedList выполняются за константное время. Операции доступа по индексу производятся перебором с начала или конца (смотря что ближе) до нужного элемента. Дополнительные затраты на хранение связки между элементами.
 
 7) Как работает HahsMap? 
 Время поиска в худшем случае?
@@ -103,6 +120,16 @@ public class A {
 Что такое монитор и т.д. Захват монитора, CAS-операции. Также общаемся на тему гарантий volatile, кэшлайны, happens-before и т.д. 
 В кэш мисс, кэш поллюшен, когерентность кешей не углубляемся.
 
+https://habr.com/ru/post/143237/
+https://habr.com/ru/post/209128/
+
+https://habr.com/ru/post/354748/
+
+https://habr.com/ru/post/133981/
+
+
+
+
 2) Synchronized vs Lock, виды локов (Reentral, ReadWriteLock).
 
 Пример неправильного лока: - что тут может пойти не так (doSomething может выкинуть исключение)?  
@@ -120,18 +147,40 @@ public void function(){
 }
 ```
 
+https://www.baeldung.com/java-concurrent-locks
+https://crunchify.com/what-is-lock-unlock-reentrantlock-trylock-and-how-its-different-from-synchronized-block-in-java/
+
+
 3) Способы создания и запуска потоков: 
 Thread, ExecutorService. 
 Какие виды ExecutoService кандидат знает? (Single, Cached, Fixed)
+
+https://www.baeldung.com/java-executors-cached-fixed-threadpool
 
 4) Deadlock/ Livelock - что это и в чем разница? 
 
 4) Задача wait/notify - Producer/Consumer задача ( сложно, предпочитаю не задавать), 
    Spurious wakeup
+ http://opensourceforgeeks.blogspot.com/2014/08/spurious-wakeups-in-java-and-how-to.html
+ https://metanit.com/java/tutorial/8.5.php
+  http://www.javenue.info/post/91
+ https://javarush.ru/groups/posts/1611-otvetih-na-voprosih-k-sobesedovaniju-level27
+
+Ответ:    
+Иногда при взаимодействии потоков встает вопрос о извещении одних потоков о действиях других. 
+Например, действия одного потока зависят от результата действий другого потока, и 
+надо как-то известить один поток, что второй поток произвел некую работу. 
+И для подобных ситуаций у класса Object определено ряд методов:
+
+   
+
 
 5) Future.get vs ExecutorService.awaitTermination
 
-6) Как правильно обрабатывать InterruptedException?
+https://stackoverflow.com/questions/43854942/javas-executorservice-awaittermination-vs-future-gettimeout
+
+
+
 
 **Часть 4** - GC:
 
@@ -140,6 +189,9 @@ Thread, ExecutorService.
 1) Знает ли поколения? 
 2) Знает ли про GC roots?
 3) Знает ли какой GC сейчас используется в Java?
+
+http://java-online.ru/garbage-collection.xhtml
+https://ziginsider.github.io/Garbage_Collector_Java/
 
 
 **Часть 5** - Задача и подводка к вопросам про Unit-тесты:
@@ -170,6 +222,24 @@ Thread, ExecutorService.
 3) Типы связываний
 4) Spring vs Spring Boot (Что такое starter? Механизм поиска автоконфигураций)
 5) Задачка на @Transactional - но попроще. На уровне одного класса.
+```
+@Service
+public class ServiceA {
+ 
+  @Transactional
+  private void doSomething() {
+    /* logic here */
+  }
+ 
+  public void doSomethingElse() {
+    this.doSomething();
+    
+  }
+}
+```
+
+https://habr.com/ru/post/532000/#infra
+
 6) Внутреннее устройство Spring MVC ( servlet, dispatcher и т.д.) - нужно ли это спрашивать? 
 
 **Часть 7** - Вопросы по Базам данных (если у кандидата в резюме указан опыт)
@@ -212,7 +282,6 @@ SELECT t1.name, t1.salary, t2.name, t2.salary FROM employee t1
  javap и т.д.
 4) Как вы понимаете REST?
 5) Generics  на примере задачи
-
 ```
 public class Foo {}
 public class Bar extends Foo {}
@@ -242,10 +311,18 @@ public static void main(String[] args) {
 
 #### **Домашнее задание** 
 
-TBD - обсудить с Димой какое ДЗ можно дать
+Условия задания
+Напишите SpringBoot приложение, которое предоставляет REST-контроллер для управления информацией о пользователях. Контроллер должен публиковать следующие операции:
 
-1) Старый вариант с дискретным ацкционом
-2) Spring Boot CRUD Service 
+создание нового пользователя;
+получения списка пользователей;
+получение информации об указанном пользователе;
+блокировка пользователя.
+Объект, описывающий запись с информацией о пользователе, должен содержать как минимум два поля: полное имя и название учетной записи. Остальные поля - на усмотрение разработчика.
+
+Для хранения данных приложения необходимо использовать таблицу реляционной базы данных. 
+
+Вместе с результатом выполнения задания необходимо прислать инструкцию по сборке, настройке и запуску приложения.
 
 **Что проверяется по результатам ДЗ?** 
 
